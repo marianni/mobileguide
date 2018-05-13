@@ -1,0 +1,15 @@
+.idea/
+adminui/target/
+backend/target/
+interfaces/target/
+
+adminui/.idea/
+backend/.idea/
+interfaces/.idea/
+
+adminui/*.iml
+backend/*.iml
+interfaces/*.iml
+
+mobileguide.iml
+
