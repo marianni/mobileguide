@@ -12,6 +12,7 @@ import java.util.Set;
         @NamedQuery(name = Employee.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT e FROM Employee e WHERE e.dataVersion > :latestDataVersion")
 })
 
+// comment
 public class Employee extends VersionedEntity {
 
 
