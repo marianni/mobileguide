@@ -1,18 +1,24 @@
 package com.marianni.mobileguide.backend.webservice;
 
 import com.marianni.mobileguide.backend.domain.*;
+import com.marianni.mobileguide.interfaces.dto.LectureDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.faces.validator.LengthValidator;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HTMLParserEmployees {
+    private final static Logger LOG = Logger.getLogger(HTMLParserEmployees.class.getName());
 
     @PersistenceContext
     private EntityManager em;
@@ -46,6 +52,10 @@ public class HTMLParserEmployees {
 
 
                 for (Element name : names) {
+                    Long startTime = System.currentTimeMillis();
+                    LOG.log(Level.SEVERE, "---------Starting employee creation");
+
+
                     //System.out.println("meno zamestnanca : " + name.getElementsByClass("list_user_name").text());
                     //System.out.println("Miesto pozicie zamestnanca : " + name.getElementsByClass("list_user_relation_position").text());
                     //System.out.println("Nazov pozicie zamestnanca : " + name.getElementsByClass("list_user_relation_name").text());
@@ -107,6 +117,10 @@ public class HTMLParserEmployees {
                     employee.setEmployeeWebs(employeeWebs);
                     employee.setEmployeePublications(employeePublications);
                     em.persist(employee);
+
+                    Long took = System.currentTimeMillis() - startTime;
+                    LOG.log(Level.SEVERE, "------------------Finished employee, took: " + took);
+                    LOG.log(Level.SEVERE, "------------------Persisted employee " + employee.getNameAndTitle());
                 }
 
             }

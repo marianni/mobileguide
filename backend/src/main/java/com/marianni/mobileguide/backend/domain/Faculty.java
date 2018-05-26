@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "faculty", schema = "public")
-@NamedQuery(name = "Faculty.findAll", query = "SELECT e FROM Faculty e")
-public class Faculty extends VersionedEntity{
+@NamedQuery(name = "Faculty.findAll", query = "SELECT e FROM Faculty e where deleted = false")
+public class Faculty extends SoftDeleteEntity{
 
 
 

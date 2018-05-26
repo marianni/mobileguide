@@ -7,8 +7,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "canteens", schema = "public")
-@NamedQuery(name="Canteen.findAll", query="SELECT c FROM Canteen c")
-public class Canteen extends VersionedEntity {
+@NamedQuery(name="Canteen.findAll", query="SELECT c FROM Canteen c where deleted = false")
+public class Canteen extends SoftDeleteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")

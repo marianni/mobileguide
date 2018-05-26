@@ -9,8 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "places", schema = "public")
-@NamedQuery(name="CandlePlace.findAll", query="SELECT c FROM CandlePlace c")
-public class CandlePlace implements Serializable{
+@NamedQuery(name="CandlePlace.findAll", query="SELECT c FROM CandlePlace c where deleted = false")
+public class CandlePlace extends SoftDeleteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")

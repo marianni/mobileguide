@@ -6,8 +6,6 @@ import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-import javafx.print.PageLayout;
-import sun.font.BidiUtils;
 
 public class PlaceComponent extends VerticalLayout {
 

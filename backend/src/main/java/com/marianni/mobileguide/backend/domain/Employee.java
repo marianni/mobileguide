@@ -2,22 +2,26 @@ package com.marianni.mobileguide.backend.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "employees", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e"),
-        @NamedQuery(name = Employee.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT e FROM Employee e WHERE e.dataVersion > :latestDataVersion")
+        @NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e")
+        //@NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e WHERE deleted = false"),
+        //@NamedQuery(name = Employee.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT e FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = false"),
+        //@NamedQuery(name = Employee.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT e.id FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = true")
 })
 
 // comment
-public class Employee extends VersionedEntity {
+public class Employee extends SoftDeleteEntity {
 
 
     public static final String FIND_ALL = "Employee.findAll";
     public static final String FIND_ALL_NEWER_THAN_VERSION = "Employee.findAllNewerThanVersion";
+    public static final String FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION = "Employee.findAllDeletedIdsNewerThanVersion";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
@@ -149,4 +153,32 @@ public class Employee extends VersionedEntity {
     public void setNameAndTitle(String nameAndTitle) {
         this.nameAndTitle = nameAndTitle;
     }
+
+    /*
+    public void addNumber(EmployeePhoneNumber number){
+        getEmployeePhoneNumbers().add(number);
+        //setChangedOn(new Date());
+    }
+
+    public void addPlace(EmployeePlace place){
+        getEmployeePlaces().add(place);
+        //setChangedOn(new Date());
+    }
+
+    public void addWeb(EmployeeWeb web){
+        getEmployeeWebs().add(web);
+        //setChangedOn(new Date());
+    }
+
+    public void addPublication(EmployeePublication publication){
+        getEmployeePublications().add(publication);
+        //setChangedOn(new Date());
+    }
+
+    public void addVoip(EmployeeVoip voip){
+        getEmployeeVoips().add(voip);
+        //setChangedOn(new Date());
+    }
+*/
+
 }

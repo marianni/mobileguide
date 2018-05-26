@@ -6,6 +6,7 @@ import java.util.Set;
 public class MobileDataDTOV1 implements Serializable {
 
     private Set<EmployeeDTO> employees;
+    private Set<Long> deletedEmployees;
     private Set<CanteenDTO> canteens;
     private Set<CanteenDailyOfferDTO> canteenDailyOffers;
     private Long currentVersionData;
@@ -41,5 +42,13 @@ public class MobileDataDTOV1 implements Serializable {
 
     public void setCanteenDailyOffers(Set<CanteenDailyOfferDTO> canteenDailyOffers) {
         this.canteenDailyOffers = canteenDailyOffers;
+    }
+
+    public Set<Long> getDeletedEmployees() {
+        return deletedEmployees;
+    }
+
+    public void setDeletedEmployees(Set<Long> deletedEmployees) {
+        this.deletedEmployees = deletedEmployees;
     }
 }

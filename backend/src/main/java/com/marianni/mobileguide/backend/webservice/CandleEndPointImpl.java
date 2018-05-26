@@ -28,8 +28,10 @@ public class CandleEndPointImpl implements CandleEndPoint {
         return service.getAllPlaces();
     }
 
+    /*
     @Override
     public Set<LectureDTO> getCandleLectures() {
         return service.getCandleLectures();
     }
+    */
 }

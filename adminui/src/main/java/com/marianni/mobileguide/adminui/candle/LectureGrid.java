@@ -1,4 +1,40 @@
 package com.marianni.mobileguide.adminui.candle;
 
-public class LectureGrid {
+import com.marianni.mobileguide.interfaces.dto.LectureDTO;
+import com.marianni.mobileguide.interfaces.restclients.RestClients;
+import com.vaadin.data.provider.ListDataProvider;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.renderers.ButtonRenderer;
+
+import java.util.Set;
+
+public class LectureGrid extends VerticalLayout{
+
+    private Grid<LectureDTO> grid;
+    ListDataProvider<LectureDTO> dataProvider;
+
+    public LectureGrid() {
+        this.grid = new Grid<>(LectureDTO.class);
+        addComponent(grid);
+        grid.setSizeFull();
+        grid.setColumns("id", "day", "startOfLesson","endOfLesson","typeOfLesson","code","subject","note");
+
+
+        /*
+        grid.asSingleSelect().addValueChangeListener(event -> {
+            if (event.getValue() == null) {
+                // nerob nic
+            } else {
+                form.refresh(event.getValue());
+            }
+        });
+        */
+    }
+
+    public void refresh(Set<LectureDTO> lectures) {
+        dataProvider = new ListDataProvider<LectureDTO>(lectures);
+        grid.setDataProvider(dataProvider);
+    }
 }

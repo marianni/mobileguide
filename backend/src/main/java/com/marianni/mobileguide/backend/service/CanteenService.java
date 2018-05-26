@@ -62,8 +62,8 @@ public class CanteenService {
         return CanteenConverter.toDTO(canteen);
     }
     public void delete(final Long id) {
-        em.remove(em.find(Canteen.class, id));
-
+        Canteen canteen = em.find(Canteen.class, id);
+        canteen.setDeleted(true);
     }
 
     public void deleteDailyOffer(Long dailyOfferId){

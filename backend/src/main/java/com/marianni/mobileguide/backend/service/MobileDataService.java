@@ -1,6 +1,7 @@
 package com.marianni.mobileguide.backend.service;
 
-import com.marianni.mobileguide.interfaces.dto.EmployeeDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marianni.mobileguide.interfaces.dto.MobileDataDTOV1;
 
 import javax.ejb.Stateless;
@@ -9,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigInteger;
-import java.util.HashSet;
-import java.util.Set;
 
 @Stateless
 public class MobileDataService {
@@ -21,16 +20,29 @@ public class MobileDataService {
     @PersistenceContext
     private EntityManager em;
 
-    public Set<MobileDataDTOV1> getMobileDataV1(final Long latestDataVersion) {
+    //nasmulovat
+    public String getMobileDataV1(final Long modelVersion, final Long latestDataVersion) {
+        try {
+            if (modelVersion == 1) {
+                MobileDataDTOV1 dto = new MobileDataDTOV1();
+                dto.setEmployees(service.getOnlyNewEmployees(latestDataVersion));
+                dto.setDeletedEmployees(service.getNewlyDeletedEmployeeIds(latestDataVersion));
+                Query q = em.createNativeQuery("SELECT last_value FROM public.data_version_sequence;");
+                BigInteger version = (BigInteger) q.getSingleResult();
+                dto.setCurrentVersionData(Long.valueOf(version.toString()));
 
-        Set<MobileDataDTOV1> dtos = new HashSet<>();
-        MobileDataDTOV1 mobileDataDTOV1 = new MobileDataDTOV1();
-        mobileDataDTOV1.setEmployees(service.getOnlyNewEmployees(latestDataVersion));
-        Query q = em.createNativeQuery( "SELECT currval('public.data_version_sequence')");
-        BigInteger version = (BigInteger) q.getSingleResult();
-        mobileDataDTOV1.setCurrentVersionData(Long.valueOf(version.toString()));
-        dtos.add(mobileDataDTOV1);
+                ObjectMapper map = new ObjectMapper();
 
-        return dtos;
+                String jsonInString = map.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
+                return jsonInString;
+
+            } else {
+                //todo tu nasimulovat  tu bude verzia dva
+                return "";
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    return "Problem";
     }
 }

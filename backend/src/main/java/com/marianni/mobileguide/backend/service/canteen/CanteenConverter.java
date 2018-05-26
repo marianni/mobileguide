@@ -20,7 +20,7 @@ public class CanteenConverter {
 
     public static Canteen toEntity(final Canteen canteen, final CanteenDTO dto) {
         canteen.setName(dto.getName());
-        toEntityDailyOffers(dto.getDailyOffers(), canteen); //todo skontrolovat ci treba konvertovat aj aj relacie, lebo oni sa na priamo updateuju z tabov
+        //toEntityDailyOffers(dto.getDailyOffers(), canteen); //todo skontrolovat ci treba konvertovat aj aj relacie, lebo oni sa na priamo updateuju z tabov
         return canteen;
     }
 

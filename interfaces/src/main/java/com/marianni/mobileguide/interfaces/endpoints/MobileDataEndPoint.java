@@ -12,6 +12,6 @@ import java.util.Set;
 public interface MobileDataEndPoint {
 
     @GET
-    @Path("/v1/{latestDataVersion}")
-    Set<MobileDataDTOV1> getMobileDataV1(@PathParam("latestDataVersion") Long latestDataVersion);
+    @Path("/{modelVersion}/{latestDataVersion}")
+    String getMobileDataV1(@PathParam("modelVersion") Long modelVersion, @PathParam("latestDataVersion") Long latestDataVersion);
 }

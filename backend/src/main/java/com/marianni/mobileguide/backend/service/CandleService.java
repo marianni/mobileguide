@@ -44,12 +44,15 @@ public class CandleService {
     public Set<CandlePlaceDTO> getAllPlaces() {
         TypedQuery<CandlePlace> query = em.createNamedQuery("CandlePlace.findAll", CandlePlace.class);
         List<CandlePlace> results = query.getResultList();
-""
+
         Set<CandlePlaceDTO> dtos = new HashSet<>();
-        results.forEach(employee -> dtos.add(CandleConverter.toDTO(employee)));
+        results.forEach(candlePlace -> dtos.add(CandleConverter.toDTO(candlePlace)));
         return dtos;
     }
 
+    /*
     public Set<LectureDTO> getCandleLectures() {
+        return null;
     }
+    */
 }

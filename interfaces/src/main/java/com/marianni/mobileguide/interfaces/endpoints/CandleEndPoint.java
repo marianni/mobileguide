@@ -9,7 +9,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.Set;
 
 @Path("/candle")
-@Produces(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/json; charset=UTF-8")
 @Consumes(MediaType.APPLICATION_JSON)
 public interface CandleEndPoint {
 
@@ -25,7 +26,9 @@ public interface CandleEndPoint {
     @Path("/all")
     Set<CandlePlaceDTO> getAllPlaces();
 
+    /*
     @GET
     @Path("/allLectures")
     Set<LectureDTO> getCandleLectures();
+    */
 }

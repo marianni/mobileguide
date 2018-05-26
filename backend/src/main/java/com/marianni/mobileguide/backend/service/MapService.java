@@ -40,7 +40,8 @@ public class MapService {
     }
 
     public void delete(final Long id){
-        em.remove(em.find(Faculty.class,id));
+        Faculty faculty = em.find(Faculty.class, id);
+        faculty.setDeleted(true);
     }
 
     //do convertera dorobit pre toto funkciu na convertovanie !!!

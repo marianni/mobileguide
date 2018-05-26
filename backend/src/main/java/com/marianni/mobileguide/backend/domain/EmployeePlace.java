@@ -2,10 +2,11 @@ package com.marianni.mobileguide.backend.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "employee_places", schema = "public")
-public class EmployeePlace extends VersionedEntity {
+public class EmployeePlace extends VersionedEntity implements ChildEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
@@ -13,6 +14,10 @@ public class EmployeePlace extends VersionedEntity {
 
     @Column(name = "place")
     private String place;
+
+    @Column(name = "employee_id", insertable=false, updatable=false)
+    private Long employeeId;
+
 
     public EmployeePlace(String place) {
         this.place = place;
@@ -35,6 +40,20 @@ public class EmployeePlace extends VersionedEntity {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    @Override
+    public void updateParent(EntityManager em) {
+        Employee employee = em.find(Employee.class, employeeId);
+        employee.setChangedOn(new Date());
     }
 
     @Override
