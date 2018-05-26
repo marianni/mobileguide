@@ -27,6 +27,9 @@ BEGIN
 END $$;
 
 
+TRUNCATE employees CASCADE;
+
+
 
 
 'canteen_daily_offers'
