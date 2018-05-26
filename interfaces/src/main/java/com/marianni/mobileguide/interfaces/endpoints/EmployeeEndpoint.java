@@ -7,9 +7,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.Set;
 
 @Path("/employee")
-//@Produces(MediaType.APPLICATION_JSON)
 @Produces("application/json; charset=UTF-8")
-@Consumes(MediaType.APPLICATION_JSON)
+@Consumes("application/json; charset=UTF-8")
 public interface EmployeeEndpoint {
 
     @GET

@@ -7,8 +7,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.Set;
 
 @Path("/mobiledata")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Produces("application/json; charset=UTF-8")
+@Consumes("application/json; charset=UTF-8")
 public interface MobileDataEndPoint {
 
     @GET
