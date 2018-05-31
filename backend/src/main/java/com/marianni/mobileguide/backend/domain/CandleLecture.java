@@ -1,5 +1,7 @@
 package com.marianni.mobileguide.backend.domain;
 
+import org.dom4j.tree.AbstractEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lectures", schema = "public")
-public class CandleLecture implements Serializable{
+public class CandleLecture extends VersionedEntity implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
@@ -135,5 +137,38 @@ public class CandleLecture implements Serializable{
                 ", note='" + note + '\'' +
                 ", employees=" + employees +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CandleLecture that = (CandleLecture) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (day != null ? !day.equals(that.day) : that.day != null) return false;
+        if (startOfLesson != null ? !startOfLesson.equals(that.startOfLesson) : that.startOfLesson != null)
+            return false;
+        if (endOfLesson != null ? !endOfLesson.equals(that.endOfLesson) : that.endOfLesson != null) return false;
+        if (typeOfLesson != null ? !typeOfLesson.equals(that.typeOfLesson) : that.typeOfLesson != null) return false;
+        if (code != null ? !code.equals(that.code) : that.code != null) return false;
+        if (subject != null ? !subject.equals(that.subject) : that.subject != null) return false;
+        if (note != null ? !note.equals(that.note) : that.note != null) return false;
+        return employees != null ? employees.equals(that.employees) : that.employees == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (day != null ? day.hashCode() : 0);
+        result = 31 * result + (startOfLesson != null ? startOfLesson.hashCode() : 0);
+        result = 31 * result + (endOfLesson != null ? endOfLesson.hashCode() : 0);
+        result = 31 * result + (typeOfLesson != null ? typeOfLesson.hashCode() : 0);
+        result = 31 * result + (code != null ? code.hashCode() : 0);
+        result = 31 * result + (subject != null ? subject.hashCode() : 0);
+        result = 31 * result + (note != null ? note.hashCode() : 0);
+        result = 31 * result + (employees != null ? employees.hashCode() : 0);
+        return result;
     }
 }

@@ -6,17 +6,19 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+/**
+ * @author mariannarachelova
+ */
+public class FreefoodUpdatePopup extends Window{
 
-public class CanteenUpdatePopup extends Window{
-
-    CanteenPopupTabsheet tabSheet;
+    FreefoodPopupTabsheet tabSheet;
     private static float WIDTH_PERCENTAGE = 0.7F;
     private static float HEIGHT_PERCENTAGE = 0.5F;
     private Button save = new Button("Save");
     private CanteenDTO dto;
 
 
-    public CanteenUpdatePopup() {
+    public FreefoodUpdatePopup() {
         setWidth(Page.getCurrent().getBrowserWindowWidth() * WIDTH_PERCENTAGE, Unit.PIXELS);
         setHeight(Page.getCurrent().getBrowserWindowWidth() * HEIGHT_PERCENTAGE, Unit.PIXELS);
         float x = (Page.getCurrent().getBrowserWindowWidth() - getWidth()) / 2;
@@ -26,7 +28,7 @@ public class CanteenUpdatePopup extends Window{
         setPositionY((int) y);
 
 
-        tabSheet = new CanteenPopupTabsheet();
+        tabSheet = new FreefoodPopupTabsheet();
 
         VerticalLayout content = new VerticalLayout();
         content.addComponents(tabSheet, save);

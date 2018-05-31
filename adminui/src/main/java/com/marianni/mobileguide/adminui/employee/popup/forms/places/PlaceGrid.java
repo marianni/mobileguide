@@ -12,6 +12,10 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PlaceGrid extends VerticalLayout {
 
     private Grid<PlaceDTO> grid;

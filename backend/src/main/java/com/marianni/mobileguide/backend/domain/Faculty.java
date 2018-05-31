@@ -4,10 +4,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "faculty", schema = "public")
-@NamedQuery(name = "Faculty.findAll", query = "SELECT e FROM Faculty e where deleted = false")
+@NamedQueries({
+        @NamedQuery(name = Faculty.FIND_ALL, query = "SELECT f FROM Faculty f WHERE deleted = false"),
+        @NamedQuery(name = Faculty.FIND_BY_MAP, query = "SELECT f FROM Faculty f WHERE f.map= :map"),
+        @NamedQuery(name = Faculty.FIND_ALL_WITH_DIFFERENT_MAP, query = "SELECT f FROM Faculty f WHERE f.map NOT IN (:map) "),
+        @NamedQuery(name = Faculty.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT f FROM Faculty f WHERE f.dataVersion > :latestDataVersion AND deleted = false"),
+        @NamedQuery(name = Faculty.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT f.id FROM Faculty f WHERE f.dataVersion > :latestDataVersion AND deleted = true")
+
+})
 public class Faculty extends SoftDeleteEntity{
 
-
+    public static final String FIND_ALL = "Faculty.findAll";
+    public static final String FIND_BY_MAP = "Faculty.findByMap";
+    public static final String FIND_ALL_WITH_DIFFERENT_MAP= "Faculty.findAllWithDifferentMap";
+    public static final String FIND_ALL_NEWER_THAN_VERSION = "Faculty.findAllNewerThanVersion";
+    public static final String FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION = "Faculty.findAllDeletedIdsNewerThanVersion";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")

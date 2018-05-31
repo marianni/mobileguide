@@ -2,7 +2,9 @@ package com.marianni.mobileguide.adminui.map.popup;
 
 import com.marianni.mobileguide.interfaces.dto.MapDTO;
 import com.vaadin.ui.TabSheet;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapPopupTabsheet extends TabSheet {
 
     private MapForm form;

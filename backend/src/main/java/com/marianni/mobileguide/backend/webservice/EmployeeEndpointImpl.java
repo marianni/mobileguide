@@ -6,7 +6,9 @@ import com.marianni.mobileguide.interfaces.endpoints.EmployeeEndpoint;
 
 import javax.inject.Inject;
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class EmployeeEndpointImpl implements EmployeeEndpoint {
 
     @Inject

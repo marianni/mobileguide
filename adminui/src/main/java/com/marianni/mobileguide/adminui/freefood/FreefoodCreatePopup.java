@@ -6,10 +6,12 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+/**
+ * @author mariannarachelova
+ */
+public class FreefoodCreatePopup extends Window {
 
-public class CanteenCreatePopup extends Window {
-
-    CanteenPopupTabsheet tabSheet;
+    FreefoodPopupTabsheet tabSheet;
     private static float WIDTH_PERCENTAGE = 0.7F;
     private static float HEIGHT_PERCENTAGE = 0.5F;
     private Button save = new Button("Save");
@@ -17,7 +19,7 @@ public class CanteenCreatePopup extends Window {
     private CanteenDTO dto;
 
 
-    public CanteenCreatePopup() {
+    public FreefoodCreatePopup() {
         setWidth(Page.getCurrent().getBrowserWindowWidth() * WIDTH_PERCENTAGE, Unit.PIXELS);
         setHeight(Page.getCurrent().getBrowserWindowWidth() * HEIGHT_PERCENTAGE, Unit.PIXELS);
         float x = (Page.getCurrent().getBrowserWindowWidth() - getWidth()) / 2;
@@ -27,7 +29,7 @@ public class CanteenCreatePopup extends Window {
         setPositionY((int) y);
 
 
-        tabSheet = new CanteenPopupTabsheet();
+        tabSheet = new FreefoodPopupTabsheet();
         tabSheet.setVisibleTabsExceptGeneral(false);
 
         VerticalLayout content = new VerticalLayout();
@@ -47,9 +49,10 @@ public class CanteenCreatePopup extends Window {
     }
 
     private void save() {
-        CanteenDTO createdCanteen = RestClients.canteen().create(dto);
-        if (createdCanteen != null && createdCanteen.getId() != null){
+        CanteenDTO createdCanteenDto = RestClients.canteen().create(dto);
+        if (createdCanteenDto != null && createdCanteenDto.getId() != null){
             tabSheet.setVisibleTabsExceptGeneral(true);
+            tabSheet.refresh(createdCanteenDto);
         }
     }
 

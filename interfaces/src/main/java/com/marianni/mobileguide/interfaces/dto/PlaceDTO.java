@@ -54,5 +54,7 @@ public class PlaceDTO implements Serializable {
         result = 17 * result + (place != null ? place.hashCode() : 0);
         return result;
     }
+
+
 }
 

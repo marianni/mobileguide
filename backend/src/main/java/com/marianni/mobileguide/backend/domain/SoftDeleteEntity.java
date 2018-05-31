@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**
- * @author Tomas Gramblicka
  * @author mariannarachelova
  */
 
@@ -22,3 +21,6 @@ public class SoftDeleteEntity extends VersionedEntity {
         this.deleted = deleted;
     }
 }
+
+
+

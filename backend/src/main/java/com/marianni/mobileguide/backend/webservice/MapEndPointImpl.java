@@ -6,7 +6,9 @@ import com.marianni.mobileguide.interfaces.endpoints.MapEndpoint;
 
 import javax.inject.Inject;
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapEndPointImpl implements MapEndpoint {
 
     @Inject

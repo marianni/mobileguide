@@ -7,6 +7,10 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class MapForm extends FormLayout {
 
     private TextArea map = new TextArea("Map");
@@ -14,6 +18,8 @@ public class MapForm extends FormLayout {
     private Binder<MapDTO> binder = new Binder<>(MapDTO.class);
 
     public MapForm() {
+        map.setSizeFull();
+        map.setHeight("700");
         addComponents(map);
         binder.bindInstanceFields(this);
     }

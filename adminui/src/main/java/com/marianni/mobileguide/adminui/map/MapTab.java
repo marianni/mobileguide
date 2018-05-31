@@ -6,7 +6,9 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapTab extends VerticalLayout {
 
     private MapGrid grid;

@@ -9,7 +9,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class WebGrid extends VerticalLayout{
 
     private Grid<WebDTO> grid;

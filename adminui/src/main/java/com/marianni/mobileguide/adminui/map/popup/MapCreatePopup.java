@@ -7,6 +7,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class MapCreatePopup extends Window {
 
     MapPopupTabsheet tabSheet;

@@ -13,6 +13,9 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
 
 public class EmployeeGrid extends VerticalLayout {
 
@@ -29,10 +32,8 @@ public class EmployeeGrid extends VerticalLayout {
                 new ButtonRenderer<>(e -> {
                     EmployeeDTO employee = (EmployeeDTO) e.getItem();
                     RestClients.employee().delete(employee.getId());
-                    dataProvider.getItems().remove(employee);
-                    dataProvider.refreshAll();
+                    refreshFromDb();
                 }));
-
 
 
         grid.addItemClickListener(e -> {
@@ -40,23 +41,23 @@ public class EmployeeGrid extends VerticalLayout {
                         EmployeeUpdatePopup popup = new EmployeeUpdatePopup();
 
                         UI.getCurrent().addWindow(popup);
-
                         popup.open(e.getItem());
+
+                        popup.addCloseListener(f -> {
+                            refreshFromDb();
+                        });
                     }
                 }
         );
-
-//        grid.asSingleSelect().addValueChangeListener(event -> {
-//            if (event.getValue() == null) {
-//                // nerob nic
-//            } else {
-//                form.refresh(event.getValue());
-//            }
-//        });
     }
 
+    private void refreshFromDb() {
+        refresh(RestClients.employee().getEmployees());
+    }
+
+
     public void refresh(final Set<EmployeeDTO> employees) {
-        dataProvider =  new ListDataProvider<EmployeeDTO>(employees);
+        dataProvider = new ListDataProvider<EmployeeDTO>(employees);
         grid.setDataProvider(dataProvider);
         dataProvider.addSortOrder(employeeDTO -> employeeDTO.getNameAndTitle(), SortDirection.ASCENDING);
         //grid.setItems(employees);

@@ -7,7 +7,9 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreefoodForm extends FormLayout{
 
     private TextField name = new TextField("Name");

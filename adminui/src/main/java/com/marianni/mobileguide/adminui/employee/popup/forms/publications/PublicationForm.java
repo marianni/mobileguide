@@ -7,6 +7,9 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
+/**
+ * @author mariannarachelova
+ */
 public class PublicationForm extends FormLayout{
 
     private TextField publicationLink = new TextField("Publication");

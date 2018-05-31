@@ -1,6 +1,5 @@
 package com.marianni.mobileguide.adminui.freefood;
 
-import com.marianni.mobileguide.adminui.freefood.forms.FreefoodForm;
 import com.marianni.mobileguide.interfaces.dto.CanteenDTO;
 import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.data.provider.ListDataProvider;
@@ -11,7 +10,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreefoodGrid extends VerticalLayout {
 
     private Grid<CanteenDTO> grid;
@@ -35,33 +36,29 @@ public class FreefoodGrid extends VerticalLayout {
 
         grid.addItemClickListener(e -> {
                     if (e.getMouseEventDetails().isDoubleClick()) {
-                        CanteenUpdatePopup popup = new CanteenUpdatePopup();
+                        FreefoodUpdatePopup popup = new FreefoodUpdatePopup();
 
                         UI.getCurrent().addWindow(popup);
 
                         popup.open(e.getItem());
+
+                        popup.addCloseListener(f -> {
+                            refreshFromDb();
+                        });
                     }
                 }
         );
+    }
 
-        /*
-        grid.asSingleSelect().addValueChangeListener(event->{
-            if(event.getValue() == null){
-                //nerob nic
-            }
-            else{
-                form.refresh(event.getValue());
-            }
-        });
-        */
-
+    private void refreshFromDb() {
+        refresh(RestClients.canteen().getAllCanteens());
     }
 
     public void refresh(final Set<CanteenDTO> canteens) {
         dataProvider =  new ListDataProvider<CanteenDTO>(canteens);
         grid.setDataProvider(dataProvider);
         dataProvider.addSortOrder(canteenDTO -> canteenDTO.getName(), SortDirection.ASCENDING);
-        grid.setItems(canteens);
+//        grid.setItems(canteens);
     }
 
 }

@@ -11,6 +11,9 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
 public class PublicationGrid extends VerticalLayout {
 
     private Grid<PublicationDTO> grid;

@@ -4,6 +4,10 @@ import com.marianni.mobileguide.interfaces.dto.CandlePlaceDTO;
 import com.marianni.mobileguide.interfaces.dto.LectureDTO;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class LectureComponent extends VerticalLayout {
 
     private LectureGrid grid;

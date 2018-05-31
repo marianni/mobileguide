@@ -7,6 +7,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PhoneNumberEditPopup extends Window {
 
     private static float WIDTH_PERCENTAGE = 0.3F;

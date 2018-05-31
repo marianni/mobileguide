@@ -4,8 +4,9 @@ import com.marianni.mobileguide.interfaces.dto.CandlePlaceDTO;
 import com.vaadin.ui.TabSheet;
 
 /**
- * @author mariannarachelova on 18/05/2018
+ * @author mariannarachelova
  */
+
 public class CandlePopupTabsheet extends TabSheet{
 
     private LectureComponent lectureComponent;

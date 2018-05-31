@@ -3,7 +3,6 @@ package com.marianni.mobileguide.adminui.employee.popup.forms.phonenumbers;
 import com.marianni.mobileguide.interfaces.dto.PhoneNumberDTO;
 import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.data.provider.ListDataProvider;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -11,18 +10,21 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PhoneNumberGrid extends VerticalLayout {
 
     private Grid<PhoneNumberDTO> grid;
     ListDataProvider<PhoneNumberDTO> dataProvider;
 
 
-
-    public PhoneNumberGrid(final PhoneNumberForm form){
+    public PhoneNumberGrid(final PhoneNumberForm form) {
         this.grid = new Grid<>(PhoneNumberDTO.class);
         addComponent(grid);
         grid.setSizeFull();
-        grid.setColumns("id","phoneNumber");
+        grid.setColumns("id", "phoneNumber");
 
 //        grid.addColumn("delete").setRenderer(new ButtonRenderer(e-> {
 //            Long phoneNumberId = ((PhoneNumberDTO) e.getItem()).getId();
@@ -34,6 +36,7 @@ public class PhoneNumberGrid extends VerticalLayout {
                     PhoneNumberDTO phoneNumber = (PhoneNumberDTO) e.getItem();
                     RestClients.employee().deletePhoneNumber(phoneNumber.getId());
                     dataProvider.getItems().remove(phoneNumber);
+                    dataProvider.getItems().removeIf(p -> p.getId().equals(phoneNumber.getId()));
                     dataProvider.refreshAll();
                 }));
 
@@ -44,8 +47,6 @@ public class PhoneNumberGrid extends VerticalLayout {
                         PhoneNumberDTO phoneNumberDto = e.getItem();
                         popup.open(phoneNumberDto);
                         popup.addCloseListener(closeEvent -> {
-                            dataProvider.getItems().remove(phoneNumberDto);
-                            dataProvider.getItems().add(popup.getPhoneNumberDto());
                             dataProvider.refreshAll();
                         });
                     }
@@ -63,8 +64,8 @@ public class PhoneNumberGrid extends VerticalLayout {
     }
 
 
-    public void refresh(final Set<PhoneNumberDTO> phoneNumbers){
-        dataProvider =  new ListDataProvider<PhoneNumberDTO>(phoneNumbers);
+    public void refresh(final Set<PhoneNumberDTO> phoneNumbers) {
+        dataProvider = new ListDataProvider<PhoneNumberDTO>(phoneNumbers);
         grid.setDataProvider(dataProvider);
     }
 }

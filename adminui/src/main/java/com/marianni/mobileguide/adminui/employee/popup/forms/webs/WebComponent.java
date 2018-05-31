@@ -6,7 +6,9 @@ import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * @author mariannarachelova
+ */
 public class WebComponent extends VerticalLayout {
 
     private WebForm form;

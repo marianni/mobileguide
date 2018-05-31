@@ -86,6 +86,12 @@
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-cdi</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.marianni.mobileguide</groupId>
 			<artifactId>interface</artifactId>
 			<version>1.0-SNAPSHOT</version>
@@ -105,7 +111,12 @@
 			<artifactId>interfaces</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

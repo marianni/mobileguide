@@ -2,16 +2,26 @@ package com.marianni.mobileguide.adminui.login;
 
 import com.vaadin.ui.VerticalLayout;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
+
 /**
- * @author mariannarachelova on 22/05/2018
+ * @author mariannarachelova
  */
+
+@Dependent
 public class LoginTab extends VerticalLayout {
 
-    private LoginFrom form;
+    @Inject
+    private LoginForm form;
 
-    public LoginTab(){
-
-        form = new LoginFrom();
+    @PostConstruct
+    public void init(){
         addComponent(form);
+    }
+
+    public void refresh() {
+        form.refresh();
     }
 }

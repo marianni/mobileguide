@@ -9,9 +9,21 @@ import java.util.Set;
 
 @Entity
 @Table(name = "places", schema = "public")
-@NamedQuery(name="CandlePlace.findAll", query="SELECT c FROM CandlePlace c where deleted = false")
+@NamedQueries({
+        @NamedQuery(name = CandlePlace.FIND_ALL, query = "SELECT c FROM CandlePlace c where deleted = false"),
+        @NamedQuery(name = CandlePlace.FIND_BY_NAME, query = "SELECT c FROM CandlePlace c WHERE c.name = :name"),
+        @NamedQuery(name = CandlePlace.FIND_ALL_WITH_DIFFERENT_NAME, query = "SELECT c FROM CandlePlace c WHERE c.name NOT IN (:names) "),
+        @NamedQuery(name = CandlePlace.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT c FROM CandlePlace c WHERE c.dataVersion > :latestDataVersion AND deleted = false"),
+        @NamedQuery(name = CandlePlace.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT c.id FROM CandlePlace c WHERE c.dataVersion > :latestDataVersion AND deleted = true")
+})
 public class CandlePlace extends SoftDeleteEntity {
 
+
+    public static final String FIND_ALL = "CandlePlace.findAll";
+    public static final String FIND_BY_NAME = "CandlePlace.findByName";
+    public static final String FIND_ALL_WITH_DIFFERENT_NAME = "CandlePlace.findAllWithDifferentName";
+    public static final String FIND_ALL_NEWER_THAN_VERSION = "CandlePlace.findAllNewerThanVersion";
+    public static final String FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION = "CandlePlace.findAllDeletedIdsNewerThanVersion";
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")
     private Long id;

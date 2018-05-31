@@ -9,11 +9,12 @@ import java.util.Set;
 @Entity
 @Table(name = "employees", schema = "public")
 @NamedQueries({
-        @NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e"),
-        @NamedQuery(name = Employee.FIND_BY_NAME_AND_TITLE, query = "SELECT e FROM Employee e WHERE e.nameAndTitle = :nameAndTitle")
-        //@NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e WHERE deleted = false"),
-        //@NamedQuery(name = Employee.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT e FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = false"),
-        //@NamedQuery(name = Employee.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT e.id FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = true")
+        @NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e WHERE deleted = false"),
+        @NamedQuery(name = Employee.FIND_BY_NAME_AND_TITLE, query = "SELECT e FROM Employee e WHERE e.nameAndTitle = :nameAndTitle"),
+        @NamedQuery(name = Employee.FIND_ALL_WITH_DIFFERENT_NAME_AND_TITLE, query = "SELECT e FROM Employee e WHERE e.nameAndTitle NOT IN (:nameAndTitles) "),
+        @NamedQuery(name = Employee.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT e FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = false"),
+        @NamedQuery(name = Employee.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT e.id FROM Employee e WHERE e.dataVersion > :latestDataVersion AND deleted = true")
+//        @NamedQuery(name = Employee.FIND_ALL, query = "SELECT e FROM Employee e"),
 })
 
 // comment
@@ -22,6 +23,7 @@ public class Employee extends SoftDeleteEntity {
 
     public static final String FIND_ALL = "Employee.findAll";
     public static final String FIND_BY_NAME_AND_TITLE = "Employee.findByNameAndTitle";
+    public static final String FIND_ALL_WITH_DIFFERENT_NAME_AND_TITLE = "Employee.findAllWithDifferentNameAndTitle";
     public static final String FIND_ALL_NEWER_THAN_VERSION = "Employee.findAllNewerThanVersion";
     public static final String FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION = "Employee.findAllDeletedIdsNewerThanVersion";
 

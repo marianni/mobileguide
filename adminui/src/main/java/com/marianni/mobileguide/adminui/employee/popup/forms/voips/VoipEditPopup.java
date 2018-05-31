@@ -7,7 +7,9 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-
+/**
+ * @author mariannarachelova
+ */
 public class VoipEditPopup extends Window {
     private static float WIDTH_PERCENTAGE = 0.3F;
     private static float HEIGHT_PERCENTAGE = 0.3F;

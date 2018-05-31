@@ -5,32 +5,82 @@ import com.marianni.mobileguide.adminui.administration.AdministrationTab;
 import com.marianni.mobileguide.adminui.candle.CandleTab;
 import com.marianni.mobileguide.adminui.employee.EmployeeTab;
 import com.marianni.mobileguide.adminui.freefood.FreeFoodTab;
+import com.marianni.mobileguide.adminui.login.LoginControl;
 import com.marianni.mobileguide.adminui.login.LoginTab;
 import com.marianni.mobileguide.adminui.map.MapTab;
 import com.vaadin.ui.TabSheet;
 
-public class MainTabSheet extends TabSheet{
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 
-    public MainTabSheet() {
+/**
+ * @author mariannarachelova
+ */
+@Dependent
+public class MainTabSheet extends TabSheet {
 
-        LoginTab loginTab = new LoginTab();
-        EmployeeTab employeeTab = new EmployeeTab();
-        CandleTab candleTab = new CandleTab();
-        FreeFoodTab freefoodTab = new FreeFoodTab();
-        AdministrationTab administrationTab = new AdministrationTab();
-        MapTab mapTab = new MapTab();
-        addTab(loginTab,"Login");
-        addTab(employeeTab,"Employee");
-        addTab(candleTab,"Candle");
-        addTab(freefoodTab,"Freefood");
-        addTab(mapTab,"Map");
-        addTab(administrationTab,"Administration");
+    @Inject
+    private LoginControl loginControl;
+
+    @Inject
+    private LoginTab loginTab;
+
+    private EmployeeTab employeeTab;
+    private CandleTab candleTab;
+    private AdministrationTab administrationTab;
+    private MapTab mapTab;
+    private FreeFoodTab freefoodTab;
 
 
-        // refresh popup data
-        employeeTab.refresh();
-        candleTab.refresh();
-        freefoodTab.refresh();
-        mapTab.refresh();
+    @PostConstruct
+    public void init() {
+        employeeTab = new EmployeeTab();
+        candleTab = new CandleTab();
+        freefoodTab = new FreeFoodTab();
+        administrationTab = new AdministrationTab();
+        mapTab = new MapTab();
+
+
+
+    }
+
+    private void addTabs(boolean isAdmin){
+        if (isAdmin) {
+            addTab(employeeTab, "Employee");
+            addTab(candleTab, "Candle");
+            addTab(freefoodTab, "Freefood");
+            addTab(mapTab, "Map");
+            addTab(administrationTab, "Administration");
+        } else {
+            addTab(freefoodTab, "Freefood");
+        }
+    }
+
+
+
+    public void refresh() {
+
+        if (loginControl.isLoggedIn()) {
+            addLoginTAB();
+
+
+            addTabs(loginControl.isAdmin());
+            employeeTab.refresh();
+            candleTab.refresh();
+            freefoodTab.refresh();
+            mapTab.refresh();
+            administrationTab.refresh();
+        } else {
+            removeAllComponents();
+            addLoginTAB();
+        }
+
+    }
+
+    public void addLoginTAB() {
+        addTab(loginTab, "Login");
+        loginTab.setVisible(true);
+        loginTab.refresh();
     }
 }

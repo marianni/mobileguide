@@ -7,7 +7,9 @@ import com.marianni.mobileguide.interfaces.endpoints.CandleEndPoint;
 
 import javax.inject.Inject;
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class CandleEndPointImpl implements CandleEndPoint {
 
     @Inject

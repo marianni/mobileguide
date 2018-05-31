@@ -1,5 +1,7 @@
 package com.marianni.mobileguide.backend.webservice;
 
+import com.marianni.mobileguide.backend.domain.Employee;
+import com.marianni.mobileguide.backend.service.EmployeeService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -7,11 +9,19 @@ import org.jsoup.select.Elements;
 
 import javax.inject.Inject;
 import java.io.IOException;
-
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+/**
+ * @author mariannarachelova
+ */
 public class HTMLParserEmployees {
 
     @Inject
     private ParseAndPersistEmployee parseAndPersistEmployee;
+
+    @Inject
+    private EmployeeService employeeService;
 
     public static void main(String[] args) {
 
@@ -27,28 +37,33 @@ public class HTMLParserEmployees {
             String urlNextPage = "";
             String urlPage = "https://fmph.uniba.sk";
 
-
-            //System.out.println("toto je user Name" + doc.getElementsByClass("list_user_contact_value span3"));
+            Set<String> parsedEmployeeNameAndTitles = new HashSet<>();
             for (int i = 0; i < 59; i++) {
                 urlNextPage = String.valueOf(new StringBuilder(urlEmployeeSearch + i));
                 System.out.println("url next " + urlNextPage);
                 Document doc = Jsoup.connect(urlNextPage).get();
                 Document document = Jsoup.parse(doc.toString());
                 Elements names = document.getElementsByClass("list_user");
-                //Elements relationPositions = document.getElementsByClass("list_user");
-                //Elements relationName = document.getElementsByClass("list_user_relation_name");
-                //Elements contactValues = document.getElementsByClass("list_user_contact_value span3");
-
 
                 for (Element name : names) {
-                    parseAndPersistEmployee.parseEmployee(name, urlPage);
+                    String nameAndTitle = name.getElementsByClass("list_user_name").text();
+                    parsedEmployeeNameAndTitles.add(nameAndTitle);
+                    parseAndPersistEmployee.parseEmployee(name, urlPage, nameAndTitle);
                 }
             }
-
+            deleteEmployessThatAreNotOnWeb(parsedEmployeeNameAndTitles);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
+
+    private void deleteEmployessThatAreNotOnWeb(Set<String> parsedEmployeeNameAndTitles) {
+        List<Employee> employeesToBeDeleted = employeeService.findAllWithDiferentNameAndTitle(parsedEmployeeNameAndTitles);
+        for (Employee e : employeesToBeDeleted) {
+            e.setDeleted(true);
+        }
+    }
+
 
 }

@@ -7,6 +7,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PhoneNumberComponent extends VerticalLayout {
 
     private PhoneNumberForm form;

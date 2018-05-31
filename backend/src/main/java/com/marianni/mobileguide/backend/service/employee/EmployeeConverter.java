@@ -3,11 +3,11 @@ package com.marianni.mobileguide.backend.service.employee;
 import com.marianni.mobileguide.backend.domain.*;
 import com.marianni.mobileguide.interfaces.dto.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**
+ * @author mariannarachelova
+ */
 public class EmployeeConverter {
 
     public static EmployeeDTO toDTO(final Employee employee) {
@@ -35,6 +35,7 @@ public class EmployeeConverter {
 
     public static EmployeePlace toEntity(PlaceDTO dto, EmployeePlace place) {
         place.setPlace(dto.getPlace());
+        place.setEmployeeId(dto.getEmployeeId());
         return place;
     }
 
@@ -67,6 +68,7 @@ public class EmployeeConverter {
 
     public static EmployeePhoneNumber toEntity(PhoneNumberDTO dto, EmployeePhoneNumber phoneNumber) {
         phoneNumber.setPhoneNumber(dto.getPhoneNumber());
+        phoneNumber.setEmployeeId(dto.getEmployeeId());
         return phoneNumber;
     }
 
@@ -98,6 +100,7 @@ public class EmployeeConverter {
 
     public static EmployeePublication toEntity(PublicationDTO dto, EmployeePublication publication) {
         publication.setPublicationLink(dto.getPublicationLink());
+        publication.setEmployeeId(dto.getEmployeeId());
         return publication;
     }
 
@@ -129,6 +132,7 @@ public class EmployeeConverter {
 
     public static EmployeeVoip toEntity(VoipDTO dto, EmployeeVoip voip) {
         voip.setVoip(Integer.valueOf(dto.getVoip()));
+        voip.setEmployeeId(dto.getEmployeeId());
         return voip;
     }
 
@@ -160,6 +164,7 @@ public class EmployeeConverter {
 
     public static EmployeeWeb toEntity(WebDTO dto, EmployeeWeb web) {
         web.setWeb(dto.getWeb());
+        web.setEmployeeId(dto.getEmployeeId());
         return web;
     }
 

@@ -6,7 +6,9 @@ import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapUpdatePopup extends Window {
 
     MapPopupTabsheet tabSheet;

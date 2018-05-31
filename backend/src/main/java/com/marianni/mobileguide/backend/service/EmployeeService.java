@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+/**
+ * @author mariannarachelova
+ */
 @Stateless
 public class EmployeeService {
 
@@ -43,6 +45,12 @@ public class EmployeeService {
         Gson gson = new Gson();
         String json = gson.toJson(results);
         return json;
+    }
+
+    public List<Employee> findAllWithDiferentNameAndTitle(Set<String> nameAndTitles) {
+        TypedQuery<Employee> query = em.createNamedQuery(Employee.FIND_ALL_WITH_DIFFERENT_NAME_AND_TITLE, Employee.class).setParameter("nameAndTitles", nameAndTitles);
+        List<Employee> results = query.getResultList();
+        return results;
     }
 
     public Set<EmployeeDTO> getEmployees() {
@@ -115,11 +123,12 @@ public class EmployeeService {
     }
 
     public PlaceDTO createPlace(PlaceDTO placeDTO) {
-        Employee employee = em.find(Employee.class, placeDTO.getEmployeeId());
         EmployeePlace place = new EmployeePlace();
-        //EmployeeConverter.toEntity(placeDTO,place);
         place = EmployeeConverter.toEntity(placeDTO, place);
-        //employee.addPlace(place);
+
+        Employee employee = em.find(Employee.class, placeDTO.getEmployeeId());
+        employee.getEmployeePlaces().add(place);
+
         em.persist(place);
         return EmployeeConverter.toDTO(placeDTO.getEmployeeId(), place);
     }
@@ -131,10 +140,12 @@ public class EmployeeService {
     }
 
     public PhoneNumberDTO createPhoneNumber(PhoneNumberDTO phoneNumberDTO) {
-        Employee employee = em.find(Employee.class, phoneNumberDTO.getEmployeeId());
         EmployeePhoneNumber phoneNumber = new EmployeePhoneNumber();
         EmployeeConverter.toEntity(phoneNumberDTO, phoneNumber);
-        //employee.addNumber(phoneNumber);
+
+        Employee employee = em.find(Employee.class, phoneNumberDTO.getEmployeeId());
+        employee.getEmployeePhoneNumbers().add(phoneNumber);
+
         em.persist(phoneNumber);
         return EmployeeConverter.toDTO(phoneNumberDTO.getEmployeeId(), phoneNumber);
     }
@@ -146,10 +157,12 @@ public class EmployeeService {
     }
 
     public PublicationDTO createPublication(PublicationDTO publicationDTO) {
-        Employee employee = em.find(Employee.class, publicationDTO.getEmployeeId());
         EmployeePublication publication = new EmployeePublication();
         EmployeeConverter.toEntity(publicationDTO, publication);
-        //employee.addPublication(publication);
+
+        Employee employee = em.find(Employee.class, publicationDTO.getEmployeeId());
+        employee.getEmployeePublications().add(publication);
+
         em.persist(publication);
         return EmployeeConverter.toDTO(publicationDTO.getEmployeeId(), publication);
     }
@@ -161,10 +174,11 @@ public class EmployeeService {
     }
 
     public VoipDTO createVoip(VoipDTO voipDTO) {
-        Employee employee = em.find(Employee.class, voipDTO.getEmployeeId());
         EmployeeVoip voip = new EmployeeVoip();
         EmployeeConverter.toEntity(voipDTO, voip);
-        //employee.addVoip(voip);
+
+        Employee employee = em.find(Employee.class, voip.getEmployeeId());
+        employee.getEmployeeVoips().add(voip);
         em.persist(voip);
         return EmployeeConverter.toDTO(voipDTO.getEmployeeId(), voip);
     }
@@ -176,10 +190,10 @@ public class EmployeeService {
     }
 
     public WebDTO createWeb(WebDTO webDTO) {
-        Employee employee = em.find(Employee.class, webDTO.getEmployeeId());
         EmployeeWeb web = new EmployeeWeb();
         EmployeeConverter.toEntity(webDTO, web);
-        //employee.addWeb(web);
+        Employee employee = em.find(Employee.class, web.getEmployeeId());
+        employee.getEmployeeWebs().add(web);
         em.persist(web);
         return EmployeeConverter.toDTO(webDTO.getEmployeeId(), web);
     }

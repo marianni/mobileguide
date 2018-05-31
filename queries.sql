@@ -28,6 +28,7 @@ END $$;
 
 
 TRUNCATE employees CASCADE;
+TRUNCATE canteens CASCADE;
 
 
 

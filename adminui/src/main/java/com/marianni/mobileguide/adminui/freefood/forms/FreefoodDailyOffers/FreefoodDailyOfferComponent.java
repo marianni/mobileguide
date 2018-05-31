@@ -6,7 +6,9 @@ import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreefoodDailyOfferComponent extends VerticalLayout {
 
     private FreefoodDailyOfferForm form;
@@ -16,7 +18,7 @@ public class FreefoodDailyOfferComponent extends VerticalLayout {
     private CanteenDailyOfferDTO dailyOfferDTO;
 
 
-    public FreefoodDailyOfferComponent(){
+    public FreefoodDailyOfferComponent() {
         form = new FreefoodDailyOfferForm();
         grid = new FreefoodDailyOfferGrid(form);
         createDailyOffer = new Button("Create Daily Offer");
@@ -37,8 +39,10 @@ public class FreefoodDailyOfferComponent extends VerticalLayout {
         return dailyOfferDto;
     }
 
-    public void save(){
-        form.save();
+    public void save() {
+        CanteenDailyOfferDTO newDailyOffer = form.save();
+        this.canteenDTO.getDailyOffers().add(newDailyOffer);
+        refresh(canteenDTO);
     }
 
     public void refresh(final CanteenDTO canteenDTO) {
@@ -47,7 +51,7 @@ public class FreefoodDailyOfferComponent extends VerticalLayout {
         grid.refresh(this.canteenDTO.getDailyOffers());
     }
 
-    private void refreshCanteenDailyOfferCreateForm(){
+    private void refreshCanteenDailyOfferCreateForm() {
         this.dailyOfferDTO = createEmptyDailyOfferDto();
         form.refresh(dailyOfferDTO);
     }

@@ -7,7 +7,9 @@ import com.marianni.mobileguide.interfaces.dto.LectureDTO;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**
+ * @author mariannarachelova
+ */
 public class CandleConverter {
 
     public static CandlePlaceDTO toDTO(final CandlePlace candlePlace){

@@ -1,12 +1,12 @@
 package com.marianni.mobileguide.adminui.freefood;
 
-import com.marianni.mobileguide.adminui.freefood.forms.FreefoodForm;
 import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreeFoodTab extends VerticalLayout {
 
 
@@ -21,7 +21,7 @@ public class FreeFoodTab extends VerticalLayout {
         addComponents(grid, create);
 
         create.addClickListener(e -> {
-                    CanteenCreatePopup popup = new CanteenCreatePopup();
+                    FreefoodCreatePopup popup = new FreefoodCreatePopup();
                     UI.getCurrent().addWindow(popup);
                     popup.open();
                     popup.addCloseListener(closeEvent -> refresh());

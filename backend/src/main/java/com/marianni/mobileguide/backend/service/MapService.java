@@ -13,6 +13,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.marianni.mobileguide.backend.domain.Faculty.FIND_ALL;
+/**
+ * @author mariannarachelova
+ */
 @Stateless
 public class MapService {
 
@@ -46,7 +50,7 @@ public class MapService {
 
     //do convertera dorobit pre toto funkciu na convertovanie !!!
     public Set<MapDTO> getMaps() {
-        TypedQuery<Faculty> query = em.createNamedQuery("Faculty.findAll", Faculty.class);
+        TypedQuery<Faculty> query = em.createNamedQuery(Faculty.FIND_ALL, Faculty.class);
         List<Faculty> results = query.getResultList();
 
         Set<MapDTO> dtos = new HashSet<>();
@@ -55,4 +59,29 @@ public class MapService {
     }
 
 
+    public Set<MapDTO> getOnlyNewMaps(Long latestDataVersion) {
+        TypedQuery<Faculty> query = em.createNamedQuery(Faculty.FIND_ALL_NEWER_THAN_VERSION, Faculty.class).setParameter("latestDataVersion", latestDataVersion);
+        List<Faculty> results = query.getResultList();
+
+        Set<MapDTO> dtos = new HashSet<>();
+        results.forEach(map -> dtos.add(MapConverter.toDTO(map)));
+        return dtos;
+    }
+
+    public Set<Long> getNewlyDeletedMapIds(final Long latestVersion) {
+        TypedQuery<Long> query = em.createNamedQuery(Faculty.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, Long.class).setParameter("latestDataVersion", latestVersion);
+        return new HashSet<>(query.getResultList());
+    }
+
+    public List<Faculty> findAllWithDiferentMap(Set<String> maps) {
+        TypedQuery<Faculty> query = em.createNamedQuery(Faculty.FIND_ALL_WITH_DIFFERENT_MAP, Faculty.class).setParameter("map", maps);
+        List<Faculty> results = query.getResultList();
+        return results;
+    }
+
+    public Faculty getMap(String map) {
+        TypedQuery<Faculty> query = em.createNamedQuery(Faculty.FIND_BY_MAP, Faculty.class).setParameter("map", map);
+        List<Faculty> results = query.getResultList();
+        return results.stream().findFirst().orElse(null);
+    }
 }

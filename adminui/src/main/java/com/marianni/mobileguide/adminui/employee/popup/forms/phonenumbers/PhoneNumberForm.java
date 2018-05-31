@@ -7,6 +7,10 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PhoneNumberForm extends FormLayout {
     private TextField phoneNumber = new TextField("Phone number");
 

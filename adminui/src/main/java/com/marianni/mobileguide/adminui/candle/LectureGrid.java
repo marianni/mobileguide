@@ -10,6 +10,10 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class LectureGrid extends VerticalLayout{
 
     private Grid<LectureDTO> grid;
@@ -21,16 +25,6 @@ public class LectureGrid extends VerticalLayout{
         grid.setSizeFull();
         grid.setColumns("id", "day", "startOfLesson","endOfLesson","typeOfLesson","code","subject","note");
 
-
-        /*
-        grid.asSingleSelect().addValueChangeListener(event -> {
-            if (event.getValue() == null) {
-                // nerob nic
-            } else {
-                form.refresh(event.getValue());
-            }
-        });
-        */
     }
 
     public void refresh(Set<LectureDTO> lectures) {

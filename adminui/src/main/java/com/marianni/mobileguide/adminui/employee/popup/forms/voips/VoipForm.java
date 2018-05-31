@@ -6,7 +6,9 @@ import com.vaadin.data.ValidationException;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
-
+/**
+ * @author mariannarachelova
+ */
 public class VoipForm extends FormLayout {
 
     private TextField voip = new TextField("Voip");

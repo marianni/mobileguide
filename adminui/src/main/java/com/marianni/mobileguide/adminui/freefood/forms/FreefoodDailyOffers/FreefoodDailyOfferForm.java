@@ -6,7 +6,9 @@ import com.vaadin.data.ValidationException;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreefoodDailyOfferForm extends FormLayout{
 
     private TextField dayAndDate = new TextField("Day and date");

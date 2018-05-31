@@ -12,6 +12,10 @@ import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class CandleGrid extends VerticalLayout {
 
     private Grid<CandlePlaceDTO> grid;
@@ -40,6 +44,5 @@ public class CandleGrid extends VerticalLayout {
         dataProvider =  new ListDataProvider<CandlePlaceDTO>(candlePlaces);
         grid.setDataProvider(dataProvider);
         dataProvider.addSortOrder(candlePlaceDTO -> candlePlaceDTO.getName(), SortDirection.ASCENDING);
-        //grid.setItems(candlePlaces);
     }
 }

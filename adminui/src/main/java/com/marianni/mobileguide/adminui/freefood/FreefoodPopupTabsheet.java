@@ -4,8 +4,10 @@ import com.marianni.mobileguide.adminui.freefood.forms.FreefoodDailyOffers.Freef
 import com.marianni.mobileguide.adminui.freefood.forms.FreefoodForm;
 import com.marianni.mobileguide.interfaces.dto.CanteenDTO;
 import com.vaadin.ui.TabSheet;
-
-public class CanteenPopupTabsheet extends TabSheet {
+/**
+ * @author mariannarachelova
+ */
+public class FreefoodPopupTabsheet extends TabSheet {
 
     private FreefoodForm generalForm;
     private FreefoodDailyOfferComponent dailyOfferComponent;
@@ -17,7 +19,7 @@ public class CanteenPopupTabsheet extends TabSheet {
 
 
 
-    public CanteenPopupTabsheet() {
+    public FreefoodPopupTabsheet() {
         generalForm = new FreefoodForm();
         generalTab = addTab(generalForm, "General Info");
 

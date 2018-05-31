@@ -1,7 +1,7 @@
 package com.marianni.mobileguide.backend.webservice;
 
 
-import com.marianni.mobileguide.backend.service.CanteenService;
+import com.marianni.mobileguide.backend.service.FreefoodService;
 import com.marianni.mobileguide.interfaces.dto.CanteenDTO;
 import com.marianni.mobileguide.interfaces.dto.CanteenDailyOfferDTO;
 import com.marianni.mobileguide.interfaces.endpoints.CanteenEndPoint;
@@ -9,10 +9,10 @@ import com.marianni.mobileguide.interfaces.endpoints.CanteenEndPoint;
 import javax.inject.Inject;
 import java.util.Set;
 
-public class CanteenEndPointImpl implements CanteenEndPoint{
+public class FreefoodEndPointImpl implements CanteenEndPoint{
 
     @Inject
-    private CanteenService service;
+    private FreefoodService service;
 
     @Override
     public String getCanteen(final Long id){ return service.getCanteen(id);}
@@ -24,7 +24,7 @@ public class CanteenEndPointImpl implements CanteenEndPoint{
 
     @Override
     public Set<CanteenDTO> getAllCanteens(){
-        return service.getAllCanteens();
+        return service.getAllCanteenDtos();
     }
 
     @Override

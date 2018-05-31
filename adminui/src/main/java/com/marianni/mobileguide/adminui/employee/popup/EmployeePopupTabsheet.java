@@ -9,7 +9,9 @@ import com.marianni.mobileguide.adminui.employee.popup.forms.webs.WebComponent;
 import com.marianni.mobileguide.interfaces.dto.EmployeeDTO;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.TabSheet;
-
+/**
+ * @author mariannarachelova
+ */
 public class EmployeePopupTabsheet extends TabSheet {
     private EmployeeGeneralForm generalForm;
     private PlaceComponent placeComponent;

@@ -5,16 +5,24 @@ import com.marianni.mobileguide.backend.domain.CanteenDailyOffer;
 import com.marianni.mobileguide.interfaces.dto.CanteenDTO;
 import com.marianni.mobileguide.interfaces.dto.CanteenDailyOfferDTO;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+/**
+ * @author mariannarachelova
+ */
 public class CanteenConverter {
 
     public static CanteenDTO toDTO(final Canteen canteen){
         CanteenDTO dto = new CanteenDTO();
         dto.setId(canteen.getId());
         dto.setName(canteen.getName());
-        dto.setDailyOffers(canteen.getDailyOffers().stream().map(dailyOffer -> toDTO(canteen.getId(), dailyOffer)).collect(Collectors.toSet()));
+
+        if (canteen.getDailyOffers() != null){
+            dto.setDailyOffers(canteen.getDailyOffers().stream().map(dailyOffer -> toDTO(canteen.getId(), dailyOffer)).collect(Collectors.toSet()));
+        }
+
+        //dto.setPhoneNumbers(employee.getEmployeePhoneNumbers().stream().map(phone -> toDTO(employee.getId(), phone)).collect(Collectors.toSet()));
         return dto;
     }
 

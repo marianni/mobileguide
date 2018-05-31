@@ -2,7 +2,9 @@ package com.marianni.mobileguide.backend.service.map;
 
 import com.marianni.mobileguide.backend.domain.Faculty;
 import com.marianni.mobileguide.interfaces.dto.MapDTO;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapConverter {
 
     public static MapDTO toDTO(final Faculty faculty) {

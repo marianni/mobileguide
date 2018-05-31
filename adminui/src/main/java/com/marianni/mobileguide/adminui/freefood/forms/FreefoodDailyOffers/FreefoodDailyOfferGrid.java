@@ -10,7 +10,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class FreefoodDailyOfferGrid extends VerticalLayout {
 
     private Grid<CanteenDailyOfferDTO> grid;
@@ -37,8 +39,8 @@ public class FreefoodDailyOfferGrid extends VerticalLayout {
                         CanteenDailyOfferDTO dailyOfferDto = e.getItem();
                         popup.open(dailyOfferDto);
                         popup.addCloseListener(closeEvent -> {
-                            dataProvider.getItems().remove(dailyOfferDto);
-                            dataProvider.getItems().add(popup.getDailyOfferDto());
+//                            dataProvider.getItems().removeIf(dailyOffer -> dailyOffer.getId().equals(dailyOfferDto.getId()));
+//                            dataProvider.getItems().add(popup.getDailyOfferDto());
                             dataProvider.refreshAll();
                         });
                     }

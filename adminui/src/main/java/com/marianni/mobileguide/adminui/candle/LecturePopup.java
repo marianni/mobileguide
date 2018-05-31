@@ -6,8 +6,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 /**
- * @author mariannarachelova on 18/05/2018
+ * @author mariannarachelova
  */
+
 public class LecturePopup extends Window {
 
     CandlePopupTabsheet tabSheet;

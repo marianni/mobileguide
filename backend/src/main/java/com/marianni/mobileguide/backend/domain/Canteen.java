@@ -7,8 +7,21 @@ import java.util.Set;
 
 @Entity
 @Table(name = "canteens", schema = "public")
-@NamedQuery(name="Canteen.findAll", query="SELECT c FROM Canteen c where deleted = false")
+@NamedQueries({
+        @NamedQuery(name=Canteen.FIND_ALL, query="SELECT c FROM Canteen c where deleted = false"),
+        @NamedQuery(name=Canteen.FIND_BY_NAME, query="SELECT c FROM Canteen c WHERE c.name = :name"),
+        @NamedQuery(name=Canteen.FIND_WITH_DIFFERENT_NAME, query="SELECT c FROM Canteen c WHERE c.name NOT IN (:names)"),
+        @NamedQuery(name=Canteen.FIND_ALL_NEWER_THAN_VERSION, query = "SELECT c FROM Canteen c WHERE c.dataVersion > :latestDataVersion AND deleted = false"),
+        @NamedQuery(name=Canteen.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, query = "SELECT c.id FROM Canteen c WHERE c.dataVersion > :latestDataVersion AND deleted = true")
+
+})
 public class Canteen extends SoftDeleteEntity {
+
+    public static final String FIND_WITH_DIFFERENT_NAME = "Canteen.findAllWithDifferentName";
+    public static final String FIND_ALL = "Canteen.findAll";
+    public static final String FIND_BY_NAME = "Canteen.findByName";
+    public static final String FIND_ALL_NEWER_THAN_VERSION = "Canteen.findAllNewerThanVersion";
+    public static final String FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION = "Canteen.findAllDeletedIdsNewerThanVersion";
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_sequence")

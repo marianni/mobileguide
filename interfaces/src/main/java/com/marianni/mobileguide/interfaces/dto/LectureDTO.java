@@ -85,4 +85,37 @@ public class LectureDTO implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LectureDTO that = (LectureDTO) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (placeId != null ? !placeId.equals(that.placeId) : that.placeId != null) return false;
+        if (day != null ? !day.equals(that.day) : that.day != null) return false;
+        if (startOfLesson != null ? !startOfLesson.equals(that.startOfLesson) : that.startOfLesson != null)
+            return false;
+        if (endOfLesson != null ? !endOfLesson.equals(that.endOfLesson) : that.endOfLesson != null) return false;
+        if (typeOfLesson != null ? !typeOfLesson.equals(that.typeOfLesson) : that.typeOfLesson != null) return false;
+        if (code != null ? !code.equals(that.code) : that.code != null) return false;
+        if (subject != null ? !subject.equals(that.subject) : that.subject != null) return false;
+        return note != null ? note.equals(that.note) : that.note == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (placeId != null ? placeId.hashCode() : 0);
+        result = 31 * result + (day != null ? day.hashCode() : 0);
+        result = 31 * result + (startOfLesson != null ? startOfLesson.hashCode() : 0);
+        result = 31 * result + (endOfLesson != null ? endOfLesson.hashCode() : 0);
+        result = 31 * result + (typeOfLesson != null ? typeOfLesson.hashCode() : 0);
+        result = 31 * result + (code != null ? code.hashCode() : 0);
+        result = 31 * result + (subject != null ? subject.hashCode() : 0);
+        result = 31 * result + (note != null ? note.hashCode() : 0);
+        return result;
+    }
 }

@@ -6,17 +6,12 @@ import com.marianni.mobileguide.interfaces.endpoints.MobileDataEndPoint;
 
 import javax.inject.Inject;
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 
 public class MobileDataEndpointImpl implements MobileDataEndPoint {
     @Inject private MobileDataService service;
-
-    /*
-    @Override
-    public Set<MobileDataDTOV1> getMobileDataV1(final Long latestDataVersion) {
-        return service.getMobileDataV1(latestDataVersion);
-    }
-    */
 
     @Override
     public String getMobileDataV1(Long modelVersion, Long latestDataVersion) {

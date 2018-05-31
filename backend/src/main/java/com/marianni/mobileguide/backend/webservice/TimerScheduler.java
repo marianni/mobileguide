@@ -8,9 +8,13 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+/**
+ * @author mariannarachelova
+ */
+
 @Startup
 @Singleton
-public class Timer {
+public class TimerScheduler {
 
     @Inject
     ScheduleTask task;
@@ -20,14 +24,14 @@ public class Timer {
     TimerService service;
 
 
-    @Schedule(hour = "*/1", minute = "*", second = "*", info = "Every 1 hour timer")
+    @Schedule(hour = "*/1", minute = "*/2", info = "Every 1 hour timer")
     public void automaticallyScheduled() {
-        //podmienka ze ak je isRunning true nech task run
-        if(service.isRunningUpdate()) {
+        if (service.isRunningUpdate()) {
             task.runTask();
         }
-        //else vyskocim z funkcie
-        return;
+        else {
+            return;
+        }
     }
 
 

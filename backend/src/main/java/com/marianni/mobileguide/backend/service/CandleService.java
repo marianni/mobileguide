@@ -16,7 +16,9 @@ import javax.persistence.TypedQuery;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 @Stateless
 public class CandleService {
 
@@ -33,7 +35,7 @@ public class CandleService {
 
     public String parseCandle() {
         parser.parseCandle();
-        TypedQuery<CandlePlace> query = em.createNamedQuery("CandlePlace.findAll", CandlePlace.class);
+        TypedQuery<CandlePlace> query = em.createNamedQuery(CandlePlace.FIND_ALL, CandlePlace.class);
         List<CandlePlace> results = query.getResultList();
         Gson gson = new Gson();
         String json = gson.toJson(results);
@@ -42,7 +44,7 @@ public class CandleService {
 
 
     public Set<CandlePlaceDTO> getAllPlaces() {
-        TypedQuery<CandlePlace> query = em.createNamedQuery("CandlePlace.findAll", CandlePlace.class);
+        TypedQuery<CandlePlace> query = em.createNamedQuery(CandlePlace.FIND_ALL, CandlePlace.class);
         List<CandlePlace> results = query.getResultList();
 
         Set<CandlePlaceDTO> dtos = new HashSet<>();
@@ -50,9 +52,29 @@ public class CandleService {
         return dtos;
     }
 
-    /*
-    public Set<LectureDTO> getCandleLectures() {
-        return null;
+    public List<CandlePlace> findAllWithDiferentName(Set<String> names) {
+        TypedQuery<CandlePlace> query = em.createNamedQuery(CandlePlace.FIND_ALL_WITH_DIFFERENT_NAME, CandlePlace.class).setParameter("name", names);
+        List<CandlePlace> results = query.getResultList();
+        return results;
     }
-    */
+
+    public Set<CandlePlaceDTO> getOnlyNewPlaces(final Long latestVersion) {
+        TypedQuery<CandlePlace> query = em.createNamedQuery(CandlePlace.FIND_ALL_NEWER_THAN_VERSION, CandlePlace.class).setParameter("latestDataVersion", latestVersion);
+        List<CandlePlace> results = query.getResultList();
+
+        Set<CandlePlaceDTO> dtos = new HashSet<>();
+        results.forEach(employee -> dtos.add(CandleConverter.toDTO(employee)));
+        return dtos;
+    }
+
+    public Set<Long> getNewlyDeletedCandlePlaceIds(final Long latestVersion) {
+        TypedQuery<Long> query = em.createNamedQuery(CandlePlace.FIND_ALL_DELETED_IDS_NEWER_THAN_VERSION, Long.class).setParameter("latestDataVersion", latestVersion);
+        return new HashSet<>(query.getResultList());
+    }
+
+    public CandlePlace getCandlePlaceByName(String name) {
+        TypedQuery<CandlePlace> query = em.createNamedQuery(CandlePlace.FIND_BY_NAME, CandlePlace.class).setParameter("name", name);
+        List<CandlePlace> results = query.getResultList();
+        return results.stream().findFirst().orElse(null);
+    }
 }

@@ -7,6 +7,10 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class PlaceForm extends FormLayout {
 
     private TextField place = new TextField("Place Name");

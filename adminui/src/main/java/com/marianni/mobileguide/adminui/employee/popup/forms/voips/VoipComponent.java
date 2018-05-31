@@ -6,7 +6,9 @@ import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-
+/**
+ * @author mariannarachelova
+ */
 public class VoipComponent extends VerticalLayout {
     private VoipForm form;
     private VoipGrid grid;

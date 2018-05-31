@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author mariannarachelova on 26/05/2018
+ * @author mariannarachelova
  */
 @Stateless
 public class ParseAndPersistEmployee {
@@ -32,7 +32,7 @@ public class ParseAndPersistEmployee {
     private EmployeeService employeeService;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void parseEmployee(Element name, String urlPage) {
+    public void parseEmployee(Element name, String urlPage, String nameAndTitle) {
         Long startTime = System.currentTimeMillis();
         LOG.log(Level.SEVERE, "---------Starting employee creation");
 
@@ -42,7 +42,7 @@ public class ParseAndPersistEmployee {
         //System.out.println("Nazov pozicie zamestnanca : " + name.getElementsByClass("list_user_relation_name").text());
         //System.out.println("Informacie o zamestnancovi: " + name.getElementsByClass("list_user_contact span5").nextAll().text());
         Employee newEmployee = new Employee();
-        newEmployee.setNameAndTitle(name.getElementsByClass("list_user_name").text());
+        newEmployee.setNameAndTitle(nameAndTitle);
         newEmployee.setRelationName(name.getElementsByClass("list_user_relation_name").text());
         newEmployee.setRelationPosition(name.getElementsByClass("list_user_relation_position").text());
         Set<EmployeePhoneNumber> employeePhoneNumbers = new HashSet<EmployeePhoneNumber>();

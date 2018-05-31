@@ -11,7 +11,9 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.renderers.ButtonRenderer;
 
 import java.util.Set;
-
+/**
+ * @author mariannarachelova
+ */
 public class MapGrid extends VerticalLayout {
 
     private Grid<MapDTO> grid;
@@ -40,10 +42,18 @@ public class MapGrid extends VerticalLayout {
                         UI.getCurrent().addWindow(popup);
 
                         popup.open(e.getItem());
+
+                        popup.addCloseListener(f -> {
+                            refreshFromDb();
+                        });
                     }
                 }
         );
 
+    }
+
+    private void refreshFromDb() {
+        refresh(RestClients.map().getMaps());
     }
 
     public void refresh(final Set<MapDTO> maps) {

@@ -3,6 +3,10 @@ package com.marianni.mobileguide.adminui.candle;
 import com.marianni.mobileguide.interfaces.restclients.RestClients;
 import com.vaadin.ui.HorizontalLayout;
 
+/**
+ * @author mariannarachelova
+ */
+
 public class CandleTab extends HorizontalLayout {
 
     private CandleGrid grid;
