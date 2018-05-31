@@ -14,7 +14,7 @@ public class TimerService {
     @PersistenceContext
     private EntityManager em;
 
-    public Boolean isRunningUpdate(){
+    public Boolean shouldSynchronizeFromExternalSource(){
         Timer timer = em.find(Timer.class,1L);
         return timer.getRunningUpdate();
     }

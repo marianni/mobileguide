@@ -15,8 +15,10 @@ import org.jsoup.select.Elements;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.text.AbstractDocument;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -37,9 +39,7 @@ public class HTMLParserFreeFood {
     }
 
     public void parseFreefood() {
-
         try {
-
             Document doc;
             Set<String> parsedCanteenNames = new HashSet<>();
             int i = -1;
@@ -87,8 +87,8 @@ public class HTMLParserFreeFood {
             deleteCanteensThatAreNotOnWeb(parsedCanteenNames);
         } catch (
                 IOException e)
-
         {
+            LOG.log(Level.SEVERE, "IO Exception occured");
         }
 
     }

@@ -23,7 +23,7 @@ public class AdministrationTab extends HorizontalLayout {
 
         buttonTimer.addClickListener((Button.ClickEvent e) -> {
 
-            if (RestClients.timer().isRunningUpdate().getRunning()) {
+            if (RestClients.timer().shouldSynchronizeFromExternalSource().getRunning()) {
                 TimerDTO dto = new TimerDTO();
                 dto.setRunning(false);
                 RestClients.timer().setTimerValue(dto);
@@ -40,7 +40,7 @@ public class AdministrationTab extends HorizontalLayout {
     }
 
     public void refresh() {
-        Boolean isRunning = RestClients.timer().isRunningUpdate().getRunning();
+        Boolean isRunning = RestClients.timer().shouldSynchronizeFromExternalSource().getRunning();
         if (isRunning) {
             renderNotRunning();
         } else {

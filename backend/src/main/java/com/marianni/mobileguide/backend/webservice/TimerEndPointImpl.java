@@ -14,9 +14,9 @@ public class TimerEndPointImpl implements TimerEndPoint {
     private TimerService service;
 
     @Override
-    public TimerDTO isRunningUpdate() {
+    public TimerDTO shouldSynchronizeFromExternalSource() {
         TimerDTO dto = new TimerDTO();
-        dto.setRunning(service.isRunningUpdate());
+        dto.setRunning(service.shouldSynchronizeFromExternalSource());
         return dto;
     }
 

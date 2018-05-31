@@ -12,7 +12,7 @@ public interface TimerEndPoint {
 
     @GET
     @Path("")
-    TimerDTO isRunningUpdate();
+    TimerDTO shouldSynchronizeFromExternalSource();
 
     @PUT
     @Path("value/")

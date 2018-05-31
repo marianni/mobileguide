@@ -1,7 +1,6 @@
 package com.marianni.mobileguide.backend.webservice;
 
 import com.marianni.mobileguide.backend.service.TimerService;
-import com.marianni.mobileguide.interfaces.restclients.RestClients;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
@@ -24,14 +23,9 @@ public class TimerScheduler {
     TimerService service;
 
 
-    @Schedule(hour = "*/1", minute = "*/2", info = "Every 1 hour timer")
+    @Schedule(hour = "*", minute = "*", info = "Every 1 hour timer")
     public void automaticallyScheduled() {
-        if (service.isRunningUpdate()) {
-            task.runTask();
-        }
-        else {
-            return;
-        }
+        task.runTask();
     }
 
 
