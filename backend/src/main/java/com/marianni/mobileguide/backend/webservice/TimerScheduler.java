@@ -23,7 +23,7 @@ public class TimerScheduler {
     TimerService service;
 
 
-    @Schedule(hour = "*", minute = "*", info = "Every 1 hour timer")
+    @Schedule(hour = "*/1", info = "Every 1 hour timer")
     public void automaticallyScheduled() {
         task.runTask();
     }
